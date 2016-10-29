@@ -2,7 +2,6 @@ package pl.gogolewski.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Table( name  = "Users")
@@ -69,15 +68,13 @@ public class User {
         return passwordHash;
     }
 
-    public int getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public int getHeight() {
-        return height;
-    }
+    public Integer getHeight() {return height;}
 
-    public double getActivityFactor() {
+    public Double getActivityFactor() {
         return activityFactor;
     }
 
@@ -85,19 +82,19 @@ public class User {
         return dietType;
     }
 
-    public int getCaloriesAmount() {
+    public Integer getCaloriesAmount() {
         return caloriesAmount;
     }
 
-    public int getProteinAmount() {
+    public Integer getProteinAmount() {
         return proteinAmount;
     }
 
-    public int getCarbsAmount() {
+    public Integer getCarbsAmount() {
         return carbsAmount;
     }
 
-    public int getFatAmount() {
+    public Integer getFatAmount() {
         return fatAmount;
     }
 
@@ -110,14 +107,14 @@ public class User {
         private String gender;
         private String email;
         private String passwordHash;
-        private int weight;
-        private int height;
-        private double activityFactor;
+        private Integer weight;
+        private Integer height;
+        private Double activityFactor;
         private String dietType;
-        private int caloriesAmount;
-        private int proteinAmount;
-        private int carbsAmount;
-        private int fatAmount;
+        private Integer caloriesAmount;
+        private Integer proteinAmount;
+        private Integer carbsAmount;
+        private Integer fatAmount;
 
 
         public UserBuilder Id(Long userId){
@@ -150,17 +147,17 @@ public class User {
             return this;
         }
 
-        public UserBuilder weight(int userWeight){
+        public UserBuilder weight(Integer userWeight){
             this.weight = userWeight;
             return this;
         }
 
-        public UserBuilder height(int userHeight){
+        public UserBuilder height(Integer userHeight){
             this.height = userHeight;
             return this;
         }
 
-        public UserBuilder activityFactor(double userActivityFactor){
+        public UserBuilder activityFactor(Double userActivityFactor){
             this.activityFactor = userActivityFactor;
             return this;
         }
@@ -170,22 +167,22 @@ public class User {
             return this;
         }
 
-        public UserBuilder caloriesAmount(int userCaloriesAmount){
+        public UserBuilder caloriesAmount(Integer userCaloriesAmount){
             this.caloriesAmount = userCaloriesAmount;
             return this;
         }
 
-        public UserBuilder proteinAmount(int userProteinAmount){
+        public UserBuilder proteinAmount(Integer userProteinAmount){
             this.proteinAmount = userProteinAmount;
             return this;
         }
 
-        public UserBuilder carbsAmount(int userCarbsAmount){
+        public UserBuilder carbsAmount(Integer userCarbsAmount){
             this.carbsAmount = userCarbsAmount;
             return this;
         }
 
-        public UserBuilder fatAmount(int userFatAmount){
+        public UserBuilder fatAmount(Integer userFatAmount){
             this.fatAmount = userFatAmount;
             return this;
         }

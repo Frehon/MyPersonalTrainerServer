@@ -28,8 +28,12 @@ public class UserService {
     }
 
     @Transactional
-    public void saveUser(User user) {
-        userRepository.save(user);
+    public User saveUser(User user) { return userRepository.save(user);}
+
+    @Transactional
+    public User updateUser(User user){
+        User oldUser = userRepository.findOne(user.getId());
+        return userRepository.save(user);
     }
 
     @Transactional
