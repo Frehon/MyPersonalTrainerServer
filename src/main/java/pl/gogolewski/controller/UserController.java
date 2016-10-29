@@ -54,25 +54,25 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> createNewUser(@RequestBody UserDTO u){
         User newUser = new User.UserBuilder()
-                .userName(u.getUserName())
-                .birthDate(u.getBirthDate())
-                .gender(u.getGender())
-                .email(u.getEmail())
-                .passwordHash(u.getPasswordHash())
-                .weight(u.getWeight())
-                .height(u.getHeight())
-                .dietType(u.getDietType())
-                .activityFactor(u.getActivityFactor())
-                .caloriesAmount(u.getCaloriesAmount())
-                .proteinAmount(u.getProteinAmount())
-                .carbsAmount(u.getCarbsAmount())
-                .fatAmount(u.getFatAmount())
+                .userName(u.userName)
+                .birthDate(u.birthDate)
+                .gender(u.gender)
+                .email(u.email)
+                .passwordHash(u.passwordHash)
+                .weight(u.weight)
+                .height(u.height)
+                .dietType(u.dietType)
+                .activityFactor(u.activityFactor)
+                .caloriesAmount(u.caloriesAmount)
+                .proteinAmount(u.proteinAmount)
+                .carbsAmount(u.carbsAmount)
+                .fatAmount(u.fatAmount)
                 .build();
         try {
             userService.saveUser(newUser);
             return new ResponseEntity<>(newUser,HttpStatus.CREATED);
         } catch (Exception e) {
-            log.error(e);
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -88,7 +88,7 @@ public class UserController {
             userService.saveUser(updatedUser);
             return new ResponseEntity<>(updatedUser,HttpStatus.CREATED);
         } catch (Exception e) {
-            log.error(e);
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

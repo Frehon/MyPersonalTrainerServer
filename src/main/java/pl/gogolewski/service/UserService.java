@@ -37,16 +37,4 @@ public class UserService {
         userRepository.delete(user);
     }
 
-
-//    Collection<User> getAllUsers();
-//
-//    User getUserById(Long userId);
-//
-//    User getUserByEmail(String userEmail);
-//
-//    User createUser(User newUser);
-//
-//    User updateUser(UserDTO userToUpdate);
-//
-//    boolean deleteUser(Long userToDeleteId);
 }

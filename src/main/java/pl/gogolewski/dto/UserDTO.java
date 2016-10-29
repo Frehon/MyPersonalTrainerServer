@@ -1,27 +1,29 @@
 package pl.gogolewski.dto;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.gogolewski.entity.User;
 
 @Data
 @NoArgsConstructor
 public class UserDTO {
 
-    private Long Id;
-    private String userName;
-    private String birthDate;
-    private String gender;
-    private String email;
-    private String passwordHash;
-    private int weight;
-    private int height;
-    private double activityFactor;
-    private String dietType;
-    private int caloriesAmount;
-    private int proteinAmount;
-    private int carbsAmount;
-    private int fatAmount;
+    public Long Id;
+    public String userName;
+    public String birthDate;
+    public String gender;
+    public String email;
+    public String passwordHash;
+    public int weight;
+    public int height;
+    public double activityFactor;
+    public String dietType;
+    public int caloriesAmount;
+    public int proteinAmount;
+    public int carbsAmount;
+    public int fatAmount;
 
     public static User convert_DTO_USER(UserDTO userToConvert) {
         return new User.UserBuilder()

@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Table(name = "Users")
+@Table( name  = "Users")
 @Entity
 @Data
 @NoArgsConstructor
