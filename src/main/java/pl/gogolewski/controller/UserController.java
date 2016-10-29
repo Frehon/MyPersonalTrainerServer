@@ -15,6 +15,8 @@ import pl.gogolewski.service.UserService;
 @CommonsLog
 public class UserController {
 
+    String test;
+
     @Autowired
     private final UserService userService;
 
