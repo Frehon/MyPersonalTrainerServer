@@ -50,6 +50,21 @@ public class UserController {
     }
 
     @RequestMapping(
+            value = "/api/user/logging/{email}/",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email){
+        if(email == null){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        User user = userService.getUserByEmail(email);
+        if(user == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<User>(user,HttpStatus.FOUND);
+    }
+
+    @RequestMapping(
             value = "/api/user",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
