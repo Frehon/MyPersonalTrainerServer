@@ -33,9 +33,7 @@ public class UserService {
 
     @Transactional
     public User updateUser(User user) throws IllegalArgumentException{
-        System.out.println("USer boniek " + user.getId());
         User oldUser = userRepository.findOne(user.getId());
-
         return saveUser(UserDTO.compareUsers(oldUser,user));
     }
 
