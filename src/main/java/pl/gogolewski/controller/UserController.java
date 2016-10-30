@@ -11,6 +11,7 @@ import pl.gogolewski.dto.UserDTO;
 import pl.gogolewski.entity.User;
 import pl.gogolewski.service.UserService;
 
+
 @RestController
 @CommonsLog
 public class UserController {
@@ -83,11 +84,12 @@ public class UserController {
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> updateUser(@RequestBody UserDTO u){
+    public ResponseEntity<User> updateUser(@PathVariable Long id , @RequestBody UserDTO u){
         try {
             User updatedUser = UserDTO.convert_DTO_USER(u);
-            userService.saveUser(updatedUser);
-            return new ResponseEntity<>(updatedUser,HttpStatus.CREATED);
+            updatedUser.setId(id);
+            userService.updateUser(updatedUser);
+            return new ResponseEntity<User>(updatedUser,HttpStatus.CREATED);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

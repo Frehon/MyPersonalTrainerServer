@@ -28,6 +28,7 @@ public class User {
     private Integer carbsAmount;
     private Integer fatAmount;
 
+
     private User(UserBuilder userBuilder) {
         userName = userBuilder.userName;
         birthDate = userBuilder.birthDate;
@@ -42,7 +43,7 @@ public class User {
         proteinAmount = userBuilder.proteinAmount;
         carbsAmount = userBuilder.carbsAmount;
         fatAmount = userBuilder.fatAmount;
-    };
+    }
 
     public Long getId() {
         return Id;
@@ -98,6 +99,61 @@ public class User {
         return fatAmount;
     }
 
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public void setActivityFactor(Double activityFactor) {
+        this.activityFactor = activityFactor;
+    }
+
+    public void setDietType(String dietType) {
+        this.dietType = dietType;
+    }
+
+    public void setCaloriesAmount(Integer caloriesAmount) {
+        this.caloriesAmount = caloriesAmount;
+    }
+
+    public void setProteinAmount(Integer proteinAmount) {
+        this.proteinAmount = proteinAmount;
+    }
+
+    public void setCarbsAmount(Integer carbsAmount) {
+        this.carbsAmount = carbsAmount;
+    }
+
+    public void setFatAmount(Integer fatAmount) {
+        this.fatAmount = fatAmount;
+    }
 
     public static class UserBuilder {
 
