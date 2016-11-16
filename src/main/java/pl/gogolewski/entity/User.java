@@ -2,6 +2,8 @@ package pl.gogolewski.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.gogolewski.dto.UserDTO;
+
 import javax.persistence.*;
 
 @Table( name  = "Users")
@@ -15,7 +17,7 @@ public class User {
     private Long Id;
 
     private String userName;
-    private String birthDate;
+    private String birthYear;
     private String gender;
     private String email;
     private String passwordHash;
@@ -31,7 +33,7 @@ public class User {
 
     private User(UserBuilder userBuilder) {
         userName = userBuilder.userName;
-        birthDate = userBuilder.birthDate;
+        birthYear = userBuilder.birthYear;
         gender = userBuilder.gender;
         email = userBuilder.email;
         passwordHash = userBuilder.passwordHash;
@@ -53,8 +55,8 @@ public class User {
         return userName;
     }
 
-    public String getBirthDate() {
-        return birthDate;
+    public String getBirthYear() {
+        return birthYear;
     }
 
     public String getGender() {
@@ -108,7 +110,7 @@ public class User {
     }
 
     public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+        this.birthYear = birthDate;
     }
 
     public void setGender(String gender) {
@@ -119,9 +121,7 @@ public class User {
         this.email = email;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
+    public void setPasswordHash(String passwordHash) {this.passwordHash = passwordHash;}
 
     public void setWeight(Integer weight) {
         this.weight = weight;
@@ -159,7 +159,7 @@ public class User {
 
         private Long Id;
         private String userName;
-        private String birthDate;
+        private String birthYear;
         private String gender;
         private String email;
         private String passwordHash;
@@ -183,8 +183,8 @@ public class User {
             return this;
         }
 
-        public UserBuilder birthDate(String userBirthdate){
-            this.birthDate = userBirthdate;
+        public UserBuilder birthYear(String userBirthdate){
+            this.birthYear = userBirthdate;
             return this;
         }
 

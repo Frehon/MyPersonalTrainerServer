@@ -61,7 +61,7 @@ public class UserController {
         if(user == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<User>(user,HttpStatus.FOUND);
+        return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -72,10 +72,10 @@ public class UserController {
     public ResponseEntity<User> createNewUser(@RequestBody UserDTO u){
         User newUser = new User.UserBuilder()
                 .userName(u.userName)
-                .birthDate(u.birthDate)
+                .birthYear(u.birthYear)
                 .gender(u.gender)
                 .email(u.email)
-                .passwordHash(u.passwordHash)
+                .passwordHash(String.valueOf(u.passwordHash.hashCode()))
                 .weight(u.weight)
                 .height(u.height)
                 .dietType(u.dietType)
@@ -86,8 +86,8 @@ public class UserController {
                 .fatAmount(u.fatAmount)
                 .build();
         try {
-            userService.saveUser(newUser);
-            return new ResponseEntity<>(newUser,HttpStatus.CREATED);
+            newUser = userService.saveUser(newUser);
+            return new ResponseEntity<User>(newUser,HttpStatus.OK);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -113,9 +113,9 @@ public class UserController {
 
     @RequestMapping(
             value = "api/user/{id}",
-            method = RequestMethod.DELETE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+            method = RequestMethod.DELETE)
     public ResponseEntity<User> deleteUser(@PathVariable Long id){
+        System.out.print("doleciał user" + id);
         User userToDelete = userService.getUserById(id);
         if (userToDelete != null){
             userService.deleteUser(userToDelete);

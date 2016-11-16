@@ -2,7 +2,12 @@ package pl.gogolewski.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bouncycastle.crypto.generators.PKCS5S2ParametersGenerator;
+import org.bouncycastle.crypto.params.KeyParameter;
 import pl.gogolewski.entity.User;
+
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 
 @Data
 @NoArgsConstructor
@@ -10,7 +15,7 @@ public class UserDTO {
 
     public Long Id;
     public String userName;
-    public String birthDate;
+    public String birthYear;
     public String gender;
     public String email;
     public String passwordHash;
@@ -29,7 +34,7 @@ public class UserDTO {
                 .Id(userToConvert.Id)
                 .userName(userToConvert.userName)
                 .gender(userToConvert.gender)
-                .birthDate(userToConvert.birthDate)
+                .birthYear(userToConvert.birthYear)
                 .email(userToConvert.email)
                 .passwordHash(userToConvert.passwordHash)
                 .weight(userToConvert.weight)
@@ -51,8 +56,8 @@ public class UserDTO {
         if(user.getGender() != null && !user.getGender().equals(oldUser.getGender())){
             oldUser.setGender(user.getGender());
         }
-        if(user.getBirthDate() != null && !user.getBirthDate().equals(oldUser.getBirthDate())){
-            oldUser.setBirthDate(user.getBirthDate());
+        if(user.getBirthYear() != null && !user.getBirthYear().equals(oldUser.getBirthYear())){
+            oldUser.setBirthDate(user.getBirthYear());
         }
         if(user.getEmail() != null && !user.getEmail().equals(oldUser.getEmail())){
             oldUser.setEmail(user.getEmail());
