@@ -11,7 +11,7 @@ import pl.gogolewski.dto.UserDTO;
 import pl.gogolewski.entity.User;
 import pl.gogolewski.service.UserService;
 
-
+//bardzo ładny kod :) J.
 @RestController
 @CommonsLog
 public class UserController {
