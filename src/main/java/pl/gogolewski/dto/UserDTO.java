@@ -63,7 +63,7 @@ public class UserDTO {
             oldUser.setEmail(user.getEmail());
         }
         if(user.getPasswordHash() != null && !user.getPasswordHash().equals(oldUser.getPasswordHash())){
-            oldUser.setPasswordHash(user.getPasswordHash());
+            oldUser.setPasswordHash(String.valueOf(user.getPasswordHash().hashCode()));
         }
         if(user.getWeight() != null && !user.getWeight().equals(oldUser.getWeight())){
             oldUser.setWeight(user.getWeight());
