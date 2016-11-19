@@ -1,15 +1,9 @@
 package pl.gogolewski.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import pl.gogolewski.dto.UserDTO;
-
 import javax.persistence.*;
 
 @Table( name  = "Users")
 @Entity
-@Data
-@NoArgsConstructor
 public class User {
 
     @Id

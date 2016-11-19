@@ -2,12 +2,8 @@ package pl.gogolewski.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bouncycastle.crypto.generators.PKCS5S2ParametersGenerator;
-import org.bouncycastle.crypto.params.KeyParameter;
 import pl.gogolewski.entity.User;
 
-import java.nio.charset.StandardCharsets;
-import java.security.SecureRandom;
 
 @Data
 @NoArgsConstructor

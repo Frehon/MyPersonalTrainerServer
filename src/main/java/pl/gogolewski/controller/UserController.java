@@ -11,11 +11,9 @@ import pl.gogolewski.dto.UserDTO;
 import pl.gogolewski.entity.User;
 import pl.gogolewski.service.UserService;
 
-//bardzo ładny kod :) J.
 @RestController
 @CommonsLog
 public class UserController {
-
 
     @Autowired
     private final UserService userService;
@@ -115,10 +113,9 @@ public class UserController {
             value = "api/user/{id}",
             method = RequestMethod.DELETE)
     public ResponseEntity<User> deleteUser(@PathVariable Long id){
-        System.out.print("doleciał user" + id);
         User userToDelete = userService.getUserById(id);
         if (userToDelete != null){
-            userService.deleteUser(userToDelete);
+            userService.deleteUser(userToDelete.getId());
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
