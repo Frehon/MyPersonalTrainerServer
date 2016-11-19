@@ -24,6 +24,7 @@ public class User {
     private Integer carbsAmount;
     private Integer fatAmount;
 
+    public User(){}
 
     private User(UserBuilder userBuilder) {
         userName = userBuilder.userName;

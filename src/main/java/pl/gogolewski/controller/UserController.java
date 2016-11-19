@@ -115,7 +115,7 @@ public class UserController {
     public ResponseEntity<User> deleteUser(@PathVariable Long id){
         User userToDelete = userService.getUserById(id);
         if (userToDelete != null){
-            userService.deleteUser(userToDelete.getId());
+            userService.deleteUser(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
