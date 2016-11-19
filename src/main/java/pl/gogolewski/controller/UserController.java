@@ -32,7 +32,7 @@ public class UserController {
         if(allUsers == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(allUsers , HttpStatus.MULTI_STATUS.OK);
+        return new ResponseEntity<>(allUsers , HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -85,7 +85,7 @@ public class UserController {
                 .build();
         try {
             newUser = userService.saveUser(newUser);
-            return new ResponseEntity<User>(newUser,HttpStatus.OK);
+            return new ResponseEntity<>(newUser,HttpStatus.OK);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -102,7 +102,7 @@ public class UserController {
             User updatedUser = UserDTO.convert_DTO_USER(u);
             updatedUser.setId(id);
             userService.updateUser(updatedUser);
-            return new ResponseEntity<User>(updatedUser,HttpStatus.CREATED);
+            return new ResponseEntity<>(updatedUser,HttpStatus.CREATED);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
