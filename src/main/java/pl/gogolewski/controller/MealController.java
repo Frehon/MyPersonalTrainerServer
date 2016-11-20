@@ -25,9 +25,6 @@ public class MealController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private UserService userService;
-
     public MealController(@NotNull MealService mealService , @NotNull ProductService productService){
         this.mealService = mealService;
         this.productService = productService;
