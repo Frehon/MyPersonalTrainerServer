@@ -46,7 +46,7 @@ public class ProductController {
     @RequestMapping(
             value = "api/product/{id}",
             method = RequestMethod.DELETE)
-    public ResponseEntity<Product> deleteUser(@PathVariable Long id){
+    public ResponseEntity<Product> deleteProduct(@PathVariable Long id){
         Product productToDelete = productService.getProductById(id);
         if (productToDelete != null){
             productService.deleteProduct(productToDelete.getId());
