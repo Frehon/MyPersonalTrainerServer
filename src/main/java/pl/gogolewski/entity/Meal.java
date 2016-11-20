@@ -19,8 +19,6 @@ public class Meal {
     @ElementCollection
     private Map<String , Integer> productsWeight;
 
-    //??????
-    //@ManyToOne(targetEntity = User.class)
     private Long userId;
 
     private String date;
@@ -41,7 +39,7 @@ public class Meal {
 
     public void setProductsWeight(Map<String, Integer> productAmounts) {this.productsWeight = productAmounts;}
 
-    public Long getUser() {return userId;}
+    public Long getUserId() {return userId;}
 
     public void setUserId(Long userId) {this.userId = userId;}
 
