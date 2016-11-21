@@ -53,7 +53,7 @@ public class UserDTO {
             oldUser.setGender(user.getGender());
         }
         if(user.getBirthYear() != null && !user.getBirthYear().equals(oldUser.getBirthYear())){
-            oldUser.setBirthDate(user.getBirthYear());
+            oldUser.setBirthYear(user.getBirthYear());
         }
         if(user.getEmail() != null && !user.getEmail().equals(oldUser.getEmail())){
             oldUser.setEmail(user.getEmail());
@@ -85,7 +85,9 @@ public class UserDTO {
         if(user.getFatAmount() != null && !user.getFatAmount().equals(oldUser.getFatAmount())){
             oldUser.setFatAmount(user.getFatAmount());
         }
+        if(oldUser.getMeals().size() < user.getMeals().size()){
+            oldUser.setMeals(user.getMeals());
+        }
         return oldUser;
     }
-    // some test comment
 }

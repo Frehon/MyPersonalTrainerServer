@@ -13,37 +13,30 @@ public class Meal {
     private Long Id;
     private String mealName;
 
+    private String date;
     @OneToMany(targetEntity = Product.class , fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     @JoinColumn(name = "meal_id")
     private List<Product> products;
     @ElementCollection
     private Map<String , Integer> productsWeight;
 
-    private Long userId;
-
-    private String date;
-
     public Long getId() {return Id;}
-
-    public void setId(Long id) {Id = id;}
 
     public String getMealName() {return mealName;}
 
-    public void setMealName(String mealName) {this.mealName = mealName;}
+    public String getDate() {return date;}
 
     public List<Product> getProducts() {return products;}
 
-    public void setProducts(List<Product> products) {this.products = products;}
-
     public Map<String, Integer> getProductsWeight() {return productsWeight;}
 
-    public void setProductsWeight(Map<String, Integer> productAmounts) {this.productsWeight = productAmounts;}
+    public void setId(Long id) {Id = id;}
 
-    public Long getUserId() {return userId;}
-
-    public void setUserId(Long userId) {this.userId = userId;}
-
-    public String getDate() {return date;}
+    public void setMealName(String mealName) {this.mealName = mealName;}
 
     public void setDate(String date) {this.date = date;}
+
+    public void setProducts(List<Product> products) {this.products = products;}
+
+    public void setProductsWeight(Map<String, Integer> productsWeight) {this.productsWeight = productsWeight;}
 }

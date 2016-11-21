@@ -11,6 +11,8 @@ import pl.gogolewski.dto.UserDTO;
 import pl.gogolewski.entity.User;
 import pl.gogolewski.service.UserService;
 
+import java.util.ArrayList;
+
 @RestController
 @CommonsLog
 public class UserController {
@@ -82,6 +84,7 @@ public class UserController {
                 .proteinAmount(u.proteinAmount)
                 .carbsAmount(u.carbsAmount)
                 .fatAmount(u.fatAmount)
+                .meals()
                 .build();
         try {
             newUser = userService.saveUser(newUser);

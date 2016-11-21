@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.gogolewski.entity.Meal;
 import pl.gogolewski.repository.MealRepository;
 
+import java.util.List;
+
 
 @Service
 public class MealService {

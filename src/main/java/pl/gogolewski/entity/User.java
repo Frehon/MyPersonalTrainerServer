@@ -1,6 +1,10 @@
 package pl.gogolewski.entity;
 
+
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table( name  = "Users")
 @Entity
@@ -24,6 +28,9 @@ public class User {
     private Integer carbsAmount;
     private Integer fatAmount;
 
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Meal> meals;
+
     public User(){}
 
     private User(UserBuilder userBuilder) {
@@ -40,6 +47,7 @@ public class User {
         proteinAmount = userBuilder.proteinAmount;
         carbsAmount = userBuilder.carbsAmount;
         fatAmount = userBuilder.fatAmount;
+        meals = userBuilder.meals;
     }
 
     public Long getId() {
@@ -96,6 +104,8 @@ public class User {
         return fatAmount;
     }
 
+    public List<Meal> getMeals() {return meals;}
+
     public void setId(Long id) {
         Id = id;
     }
@@ -104,9 +114,7 @@ public class User {
         this.userName = userName;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthYear = birthDate;
-    }
+    public void setBirthYear(String birthYear) {this.birthYear = birthYear;}
 
     public void setGender(String gender) {
         this.gender = gender;
@@ -150,6 +158,8 @@ public class User {
         this.fatAmount = fatAmount;
     }
 
+    public void setMeals(List<Meal> meals) {this.meals = meals;}
+
     public static class UserBuilder {
 
         private Long Id;
@@ -166,6 +176,7 @@ public class User {
         private Integer proteinAmount;
         private Integer carbsAmount;
         private Integer fatAmount;
+        private List<Meal> meals;
 
 
         public UserBuilder Id(Long userId){
@@ -235,6 +246,11 @@ public class User {
 
         public UserBuilder fatAmount(Integer userFatAmount){
             this.fatAmount = userFatAmount;
+            return this;
+        }
+
+        public UserBuilder meals(){
+            this.meals = new ArrayList<>();
             return this;
         }
 
