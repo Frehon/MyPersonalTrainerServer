@@ -44,6 +44,21 @@ public class ProductController {
     }
 
     @RequestMapping(
+            value = "/api/product/{product_name}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Product> findProductByName(@PathVariable(name = "product_name") String productName){
+        if(productName == null){
+            return new ResponseEntity<Product>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        Product soughtProduct = productService.getProductByName(productName);
+        if(soughtProduct == null){
+            return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Product>(soughtProduct , HttpStatus.OK);
+    }
+
+    @RequestMapping(
             value = "api/product/{id}",
             method = RequestMethod.DELETE)
     public ResponseEntity<Product> deleteProduct(@PathVariable Long id){

@@ -85,9 +85,6 @@ public class UserDTO {
         if(user.getFatAmount() != null && !user.getFatAmount().equals(oldUser.getFatAmount())){
             oldUser.setFatAmount(user.getFatAmount());
         }
-        if(oldUser.getMeals().size() < user.getMeals().size()){
-            oldUser.setMeals(user.getMeals());
-        }
         return oldUser;
     }
 }

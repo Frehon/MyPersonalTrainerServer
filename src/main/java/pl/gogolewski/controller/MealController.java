@@ -76,7 +76,7 @@ public class MealController {
                selectedMeal.getProductsWeight().put(product_name , selectedMeal.getProductsWeight().get(product_name) + product_weight);
             }
             selectedMeal = mealService.saveMeal(selectedMeal);
-            return new ResponseEntity<Meal>(selectedMeal , HttpStatus.OK);
+            return new ResponseEntity<>(selectedMeal , HttpStatus.OK);
         }
         catch(Exception e){
             System.out.println(e.getMessage()) ;
