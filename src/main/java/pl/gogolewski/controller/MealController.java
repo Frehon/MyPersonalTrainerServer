@@ -12,6 +12,8 @@ import pl.gogolewski.entity.User;
 import pl.gogolewski.service.MealService;
 import pl.gogolewski.service.ProductService;
 import pl.gogolewski.service.UserService;
+
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +32,7 @@ public class MealController {
     @Autowired
     private UserService userService;
 
-    public MealController(MealService mealService , ProductService productService , UserService userService){
+    public MealController(@NotNull  MealService mealService , @NotNull ProductService productService ,@NotNull UserService userService){
         this.mealService = mealService;
         this.productService = productService;
         this.userService = userService;
@@ -85,19 +87,18 @@ public class MealController {
     }
 
     @RequestMapping(
-            value = "/api/meals/{user_id}/{date}",
+            value = "/api/meals/{userId}/{date}",
             method = RequestMethod.GET,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Meal>> getMealsByDateByUserId(@PathVariable Long user_id , @PathVariable String date){
+    public ResponseEntity<List<Meal>> getMealsByDateByUserId(@PathVariable(name = "userId" ) Long userId , @PathVariable(name = "date") String date ){
         try{
             List<Meal> meals = new ArrayList<>();
-            User selectedUser = userService.getUserById(user_id);
+            User selectedUser = userService.getUserById(userId);
             meals.addAll(selectedUser.getMeals().stream().filter(m -> m.getDate().equals(date)).collect(Collectors.toList()));
             return new ResponseEntity<>(meals , HttpStatus.OK);
         }
         catch(Exception e){
-            System.out.println(e.getMessage()) ;
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
