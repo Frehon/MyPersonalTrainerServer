@@ -71,12 +71,20 @@ public class MealController {
     }
 
     @RequestMapping(
-            value = "/api/meal",
+            value = "/api/meal/{meal_id}/{product_id}/{product_weight}",
             method = RequestMethod.PUT,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Meal> updateMeal(@RequestBody Meal mealToUpdate){
+    public ResponseEntity<Meal> updateMeal(@PathVariable("meal_id") Long mealId ,  @PathVariable("product_id") Long productId , @PathVariable("product_weight") int productWeight){
         try{
+            Product productToAdd = productService.getProductById(productId);
+            Meal mealToUpdate = mealService.getMealById(mealId);
+            if(mealToUpdate.getProductsWeight().containsKey(productToAdd.getProductName())){
+                mealToUpdate.getProductsWeight().put(productToAdd.getProductName() ,mealToUpdate.getProductsWeight().get(productToAdd.getProductName()) + productWeight);
+            }
+            else{
+                mealToUpdate.getProducts().add(productToAdd);
+                mealToUpdate.getProductsWeight().put(productToAdd.getProductName() , productWeight);
+            }
             mealService.updateMeal(mealToUpdate);
             return new ResponseEntity<>(mealToUpdate , HttpStatus.OK);
         }
