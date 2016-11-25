@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.gogolewski.dto.MealDTO;
 import pl.gogolewski.entity.Meal;
+import pl.gogolewski.entity.Product;
 import pl.gogolewski.entity.User;
 import pl.gogolewski.service.MealService;
 import pl.gogolewski.service.ProductService;
@@ -39,49 +40,47 @@ public class MealController {
     }
 
     @RequestMapping(
-            value = "/api/meal",
+            value = "/api/meals/{userId}",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Meal> createNewMeal(@RequestBody MealDTO mealDTO){
-        Meal meal = new Meal();
-        meal.setMealName(mealDTO.getMealName());
-        meal.setDate(mealDTO.getDate());
-        meal.setProducts(new ArrayList<>());
-        meal.setProductsWeight(new HashMap<>());
-        try{
-            meal = mealService.saveMeal(meal);
-            User loggedUser = userService.getUserById(mealDTO.getUserId());
-            loggedUser.getMeals().add(meal);
-            userService.saveUser(loggedUser);
-            return new ResponseEntity<>(meal,HttpStatus.OK);
+    public ResponseEntity<List<Meal>> createNewMeals(@RequestBody List<MealDTO> mealsDTOs , @PathVariable("userId") Long userId){
+        List<Meal> newMeals = new ArrayList<>();
+        for(MealDTO mealDTO : mealsDTOs){
+            Meal newMeal = new Meal();
+            newMeal.setMealName(mealDTO.getMealName());
+            newMeal.setDate(mealDTO.getDate());
+            newMeal.setProducts(new ArrayList<>());
+            newMeal.setProductsWeight(new HashMap<>());
+            try{
+                newMeals.add(mealService.saveMeal(newMeal));
+            }
+            catch(Exception e){
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
-        catch(Exception e) {
-            System.out.println(e.getMessage()) ;
+        try{
+            User selectedUser = userService.getUserById(userId);
+            selectedUser.getMeals().addAll(newMeals);
+            userService.saveUser(selectedUser);
+        }
+        catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        return new ResponseEntity<>(newMeals , HttpStatus.OK);
     }
 
     @RequestMapping(
-            value = "/api/meal/{product_name}/{product_weight}",
-            method = RequestMethod.POST,
+            value = "/api/meal",
+            method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Meal> addProductToMeal(@RequestBody MealDTO mealDTO , @PathVariable String product_name , @PathVariable Integer product_weight){
+    public ResponseEntity<Meal> updateMeal(@RequestBody Meal mealToUpdate){
         try{
-            Meal selectedMeal = mealService.getMealById(mealDTO.getId());
-            if(!selectedMeal.getProductsWeight().containsKey(product_name)){
-                selectedMeal.getProducts().add(productService.getProductByName(product_name));
-                selectedMeal.getProductsWeight().put(product_name,product_weight);
-            }
-            else{
-               selectedMeal.getProductsWeight().put(product_name , selectedMeal.getProductsWeight().get(product_name) + product_weight);
-            }
-            selectedMeal = mealService.saveMeal(selectedMeal);
-            return new ResponseEntity<>(selectedMeal , HttpStatus.OK);
+            mealService.updateMeal(mealToUpdate);
+            return new ResponseEntity<>(mealToUpdate , HttpStatus.OK);
         }
         catch(Exception e){
-            System.out.println(e.getMessage()) ;
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

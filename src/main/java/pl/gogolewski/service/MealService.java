@@ -17,4 +17,6 @@ public class MealService {
     public Meal saveMeal(Meal newMeal){return mealRepository.save(newMeal);}
 
     public Meal getMealById(Long id) {return mealRepository.findOne(id);}
+
+    public Meal updateMeal(Meal mealToUpdate){return mealRepository.save(mealToUpdate);}
 }

@@ -12,10 +12,9 @@ public class Meal {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
     private String mealName;
-
     private String date;
     @OneToMany(targetEntity = Product.class , fetch = FetchType.EAGER , cascade = CascadeType.ALL)
-    @JoinColumn(name = "meal_id")
+    //@JoinColumn(name = "meal_id")
     private List<Product> products;
     @ElementCollection
     private Map<String , Integer> productsWeight;
