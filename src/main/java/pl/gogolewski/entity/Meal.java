@@ -13,7 +13,7 @@ public class Meal {
     private Long Id;
     private String mealName;
     private String date;
-    @OneToMany(targetEntity = Product.class , fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Product.class , fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     //@JoinColumn(name = "meal_id")
     private List<Product> products;
     @ElementCollection
