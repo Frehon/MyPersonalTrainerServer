@@ -14,7 +14,6 @@ public class Meal {
     private String mealName;
     private String date;
     @ManyToMany(targetEntity = Product.class , fetch = FetchType.EAGER , cascade = CascadeType.ALL)
-    //@JoinColumn(name = "meal_id")
     private List<Product> products;
     @ElementCollection
     private Map<String , Integer> productsWeight;

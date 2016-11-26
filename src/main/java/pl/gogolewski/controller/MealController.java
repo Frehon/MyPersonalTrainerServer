@@ -94,6 +94,28 @@ public class MealController {
     }
 
     @RequestMapping(
+            value = "/api/meal/{meal_id}/{product_id}",
+            method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Meal> deleteMealItem(@PathVariable("meal_id") Long mealId , @PathVariable("product_id") Long productId ){
+        try{
+            Product product = productService.getProductById(productId);
+            Meal selectedMeal = mealService.getMealById(mealId);
+            for(int i = 0 ; i < selectedMeal.getProducts().size() ; i++){
+                if(selectedMeal.getProducts().get(i).getId() == productId){
+                    selectedMeal.getProducts().remove(i);
+                    selectedMeal.getProductsWeight().remove(product.getProductName());
+                }
+            }
+            mealService.saveMeal(selectedMeal);
+            return new ResponseEntity<>(selectedMeal , HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(
             value = "/api/meals/{userId}/{date}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
