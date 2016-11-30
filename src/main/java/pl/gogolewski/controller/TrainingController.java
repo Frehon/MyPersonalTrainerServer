@@ -53,7 +53,7 @@ public class TrainingController {
     @RequestMapping(
             value = "api/training/{id}",
             method = RequestMethod.DELETE)
-    public ResponseEntity<Training> deleteUser(@PathVariable Long id){
+    public ResponseEntity<Training> deleteTraining(@PathVariable Long id){
         try{
           trainingService.deleteTraining(id);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
