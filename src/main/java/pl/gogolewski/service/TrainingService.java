@@ -19,7 +19,11 @@ public class TrainingService {
         return trainingRepository.save(newTraining);
     }
 
-    public Iterable<Training> getAllTrainings() {
-        return trainingRepository.findAll();
+    public Iterable<Training> getAllUserTrainings(Long userId) {
+        return trainingRepository.findByUserId(userId);
+    }
+
+    public void deleteTraining(Long id) {
+        trainingRepository.delete(id);
     }
 }

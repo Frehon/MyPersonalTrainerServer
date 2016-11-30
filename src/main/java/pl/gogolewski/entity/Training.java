@@ -11,12 +11,13 @@ public class Training {
     private Long Id;
     private String activityName;
     private int duration;
-
+    private String date;
     private Long userId;
 
-    public Training(String activityName , int duration , Long userId){
+    public Training(String activityName , int duration , String date  , Long userId){
         this.activityName = activityName;
         this.duration = duration;
+        this.date = date;
         this.userId = userId;
     }
 
@@ -46,13 +47,14 @@ public class Training {
         this.duration = duration;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
+    public String getDate() {return date;}
 
-    public void setUser(Long userId) {
-        this.userId = userId;
-    }
+    public void setDate(String date) {this.date = date;}
+
+    public Long getUserId(){return userId;}
+
+    public void setUserId(Long userId) {this.userId = userId;}
+
 }
 
 

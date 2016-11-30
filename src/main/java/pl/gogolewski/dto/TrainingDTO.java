@@ -7,6 +7,7 @@ public class TrainingDTO {
     public String activityName;
     public int duration;
     public Long userId;
+    public String date;
 
     public Long getId() {return Id;}
 
@@ -23,4 +24,8 @@ public class TrainingDTO {
     public Long getUserId() {return userId;}
 
     public void setUserId(Long userId) {this.userId = userId;}
+
+    public String getDate() {return date;}
+
+    public void setDate(String date) {this.date = date;}
 }
