@@ -51,7 +51,7 @@ public class TrainingController {
     }
 
     @RequestMapping(
-            value = "api/training/{id}",
+            value = "/api/training/{id}",
             method = RequestMethod.DELETE)
     public ResponseEntity<Training> deleteTraining(@PathVariable Long id){
         try{
