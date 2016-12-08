@@ -15,9 +15,7 @@ import pl.gogolewski.service.ProductService;
 import pl.gogolewski.service.UserService;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -121,10 +119,41 @@ public class MealController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Meal>> getMealsByDateByUserId(@PathVariable(name = "userId" ) Long userId , @PathVariable(name = "date") String date ){
         try{
-            List<Meal> meals = new ArrayList<>();
+            Set<Meal> meals = new HashSet<>();
             User selectedUser = userService.getUserById(userId);
-            meals.addAll(selectedUser.getMeals().stream().filter(m -> m.getDate().equals(date)).collect(Collectors.toList()));
-            return new ResponseEntity<>(meals , HttpStatus.OK);
+            meals.addAll(selectedUser.getMeals().stream().filter(m -> m.getDate().equals(date)).collect(Collectors.toSet()));
+            List<Meal> result = new ArrayList<>(meals);
+            Meal helper = new Meal();
+            if(result.size() == 5){
+                for(int i = 0 ; i < 5 ; i++){
+                    if(result.get(i).getMealName().equals("Sniadanie")){
+                        helper = result.get(0);
+                        result.set(0,result.get(i));
+                        result.set(i , helper);
+                    }
+                    if(result.get(i).getMealName().equals("Lunch")){
+                        helper = result.get(1);
+                        result.set(1,result.get(i));
+                        result.set(i , helper);
+                    }
+                    if(result.get(i).getMealName().equals("Obiad")){
+                        helper = result.get(2);
+                        result.set(2,result.get(i));
+                        result.set(i , helper);
+                    }
+                    if(result.get(i).getMealName().equals("Podwieczorek")){
+                        helper = result.get(3);
+                        result.set(3,result.get(i));
+                        result.set(i , helper);
+                    }
+                    if(result.get(i).getMealName().equals("Kolacja")){
+                        helper = result.get(4);
+                        result.set(4,result.get(i));
+                        result.set(i , helper);
+                    }
+                }
+            }
+            return new ResponseEntity<>(result , HttpStatus.OK);
         }
         catch(Exception e){
             System.out.println(e.getMessage());
